@@ -1,0 +1,220 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <title>Greek words</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="py-5 text-center">
+            <h1>Score <span id="score"></span> </h1>
+        </div>
+    
+        <div class="row row-cols-2 g-2">
+            <div class="col w-50">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title">Next item language</p>
+                        <div class="btn-group" role="group" aria-label="Next item language">
+                            
+                            <input type="radio" class="btn-check" name="language" id="gr_radio" autocomplete="off" value="gr">
+                            <label class="btn btn-outline-primary" for="gr_radio">Ελληνικά</label>
+                        
+                            <input type="radio" class="btn-check" name="language" id="ru_radio" autocomplete="off" value="ru">
+                            <label class="btn btn-outline-primary" for="ru_radio">Русский</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col w-50">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title">Next item unit</p>
+                        <div class="btn-group" role="group" aria-label="Next item unit" id="units">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col w-100">
+                <div class="card">
+                    <div class="card-body" >
+                        <div class="card-text" id="lines"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="greek.js"></script>
+    <script>
+        const container = document.getElementById("container")
+        var know_count = 0;
+        var dont_know_count = 0;
+
+        // add score line
+        const score_line = document.getElementById("score")
+
+        // add laguage switcher
+        const gr_radio = document.getElementById("gr_radio")
+        const ru_radio = document.getElementById("ru_radio")
+        
+        // add lines
+        const lines = document.getElementById("lines")
+
+        function update_score(){
+            score_line.innerText = 'Wins: ' + know_count + ' | Loses: ' + dont_know_count;
+        }
+        update_score();
+
+        var selected_unit = undefined;
+        var selected_language = undefined;
+        var element_was_added = true;
+        var element_is_solved = true;
+        function try_to_show_next(){
+            console.log(selected_language);
+            if (selected_unit && selected_language){
+                let unit_obj = document.elements_iters[selected_unit]
+                let elements_iter = unit_obj.elements_iter
+                let element_was_added = unit_obj.element_was_added
+                if (element_was_added && element_is_solved){
+                    unit_obj.element_was_added = elements_iter.next().value;
+                }
+            }
+        }
+        gr_radio.onclick = function(){
+            selected_language = this.value;
+            try_to_show_next();
+        }
+        ru_radio.onclick = function(){
+            selected_language = this.value;
+            try_to_show_next();
+        }
+
+
+        // add unit padio buttons
+        units = document.getElementById('units')
+        document.elements_iters = new Object();
+        for (let unit_name in en_greek_ru){
+            var unit = new Object();
+            document.elements_iters[unit_name] = unit;
+            unit.elements_iter = add_one_more_element(unit_name);
+            unit.element_was_added = true;
+
+            let unit_radio = document.createElement("input");
+            unit_radio.setAttribute('type', "radio");
+            unit_radio.setAttribute('class', "btn-check");
+            unit_radio.setAttribute('name', 'unit');
+            unit_radio.setAttribute('id', unit_name + '_radio');
+            unit_radio.setAttribute('autocomplete', "off");
+            unit_radio.setAttribute('value', unit_name);
+            units.appendChild(unit_radio);
+
+            let unit_label = document.createElement("label");
+            unit_label.innerText = unit_name.toUpperCase();
+            unit_label.setAttribute('class', "btn btn-outline-primary");
+            unit_label.setAttribute('for', unit_name + '_radio');
+            units.appendChild(unit_label);
+            
+            unit_radio.onclick = function(){
+                selected_unit = this.value;
+                document.elements_iter = document.elements_iters[this.value].elements_iter;
+                try_to_show_next();
+            }
+        }
+
+        function* add_one_more_element(unit_name_){
+            // Create element:
+            let lang_word_map_list = en_greek_ru[unit_name_];
+            for (let i = lang_word_map_list.length; i > 0; i--){
+                // add line
+                const line = document.createElement("h4");
+                lines.prepend(line);
+
+                // add part
+                const part = document.createElement("span");
+                part.innerText = unit_name_.toUpperCase();
+                line.appendChild(part);
+
+                // add buttons
+                const buttons = document.createElement("div");
+                buttons.setAttribute('class', "btn-group");
+                buttons.setAttribute('role', "group");
+                line.appendChild(buttons);
+                // add V and X buttons
+                const know_button = document.createElement("button");
+                know_button.setAttribute("type", "button");
+                know_button.setAttribute("class", "btn btn-success");
+                know_button.innerText = 'V'
+                buttons.appendChild(know_button);
+
+                const dont_know_button = document.createElement("button");
+                dont_know_button.setAttribute("type", "button");
+                dont_know_button.setAttribute("class", "btn btn-danger");
+                dont_know_button.innerText = 'X'
+                buttons.appendChild(dont_know_button);
+
+                // add word
+                const word_el = document.createElement("span");
+                word_el.setAttribute("class", "badge text-bg-light shadow-lg");
+                line.appendChild(word_el);
+
+                // add translation element
+                const translations = document.createElement("span");
+                translations.style.visibility = "hidden";
+                line.appendChild(translations);
+
+
+                know_button.onclick = function(){
+                    know_count++;
+                    element_is_solved = true;
+                    update_score();
+                    word_el.setAttribute("class", "badge text-bg-success shadow-lg");
+                    translations.style.visibility = "visible";
+                    try_to_show_next();
+                    buttons.remove();
+                };
+
+                dont_know_button.onclick = function(){
+                    dont_know_count++;
+                    element_is_solved = true;
+                    update_score();
+                    word_el.setAttribute("class", "badge text-bg-danger shadow-lg");
+                    translations.style.visibility = "visible";
+                    try_to_show_next();
+                    buttons.remove();
+                };
+
+                // add word
+                const random_id = Math.floor(Math.random() * lang_word_map_list.length);
+                let lang_word_map = lang_word_map_list[random_id]
+                
+                lang_word_map_list.splice(random_id, 1);
+
+                word_el.innerText = selected_language + ': ' + lang_word_map[selected_language];
+                delete lang_word_map[selected_language];
+
+                // add translations for other 
+                for (let transl_lang_key in lang_word_map){
+                    const word_translation_el = document.createElement("span");
+                    word_translation_el.setAttribute('class', "badge text-bg-light border-secondary shadow-lg")
+                    word_translation_el.innerText = transl_lang_key + ': ' + lang_word_map[transl_lang_key];
+                    translations.appendChild(word_translation_el);
+                }
+
+                element_is_solved = false;
+
+                yield true
+            }
+
+            return false
+        }
+
+    </script>
+</body>
+
+</html>
