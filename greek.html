@@ -15,8 +15,8 @@
             <h1>Score <span id="score"></span> </h1>
         </div>
     
-        <div class="row row-cols-2 g-2">
-            <div class="col w-50">
+        <div class="row g-2 p-1">
+            <div class="col">
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title">Next item language</p>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col w-50">
+            <div class="col">
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title">Next item unit</p>
@@ -41,6 +41,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row g-2 p-1">
             <div class="col w-100">
                 <div class="card">
                     <div class="card-body" >
@@ -134,17 +136,18 @@
             let lang_word_map_list = en_greek_ru[unit_name_];
             for (let i = lang_word_map_list.length; i > 0; i--){
                 // add line
-                const line = document.createElement("h4");
+                const line = document.createElement("div");
+                line.setAttribute('class', "p-1");
                 lines.prepend(line);
 
-                // add part
+                // add unit
                 const part = document.createElement("span");
                 part.innerText = unit_name_.toUpperCase();
                 line.appendChild(part);
 
                 // add buttons
                 const buttons = document.createElement("div");
-                buttons.setAttribute('class', "btn-group");
+                buttons.setAttribute('class', "d-inline p-1 btn-group btn-group-sm flex-sm-fill");
                 buttons.setAttribute('role', "group");
                 line.appendChild(buttons);
                 // add V and X buttons
@@ -161,22 +164,22 @@
                 buttons.appendChild(dont_know_button);
 
                 // add word
-                const word_el = document.createElement("span");
-                word_el.setAttribute("class", "badge text-bg-light shadow-lg");
+                const word_style = "d-sm-block d-md-inline p-1 g-2 rounded border border-black";
+                const word_el = document.createElement("div");
+                word_el.setAttribute("class", word_style + " text-bg-light");
                 line.appendChild(word_el);
 
                 // add translation element
-                const translations = document.createElement("span");
-                translations.style.visibility = "hidden";
+                const translations = document.createElement("div");
+                translations.setAttribute('class', "d-none");
                 line.appendChild(translations);
-
 
                 know_button.onclick = function(){
                     know_count++;
                     element_is_solved = true;
                     update_score();
-                    word_el.setAttribute("class", "badge text-bg-success shadow-lg");
-                    translations.style.visibility = "visible";
+                    word_el.setAttribute("class", word_style + " text-bg-success");
+                    translations.setAttribute('class', "d-inline");
                     try_to_show_next();
                     buttons.remove();
                 };
@@ -185,8 +188,8 @@
                     dont_know_count++;
                     element_is_solved = true;
                     update_score();
-                    word_el.setAttribute("class", "badge text-bg-danger shadow-lg");
-                    translations.style.visibility = "visible";
+                    word_el.setAttribute("class", word_style + " text-bg-danger");
+                    translations.setAttribute('class', "d-inline");
                     try_to_show_next();
                     buttons.remove();
                 };
@@ -202,8 +205,8 @@
 
                 // add translations for other 
                 for (let transl_lang_key in lang_word_map){
-                    const word_translation_el = document.createElement("span");
-                    word_translation_el.setAttribute('class', "badge text-bg-light border-secondary shadow-lg")
+                    const word_translation_el = document.createElement("div");
+                    word_translation_el.setAttribute('class', word_style + " text-bg-light")
                     word_translation_el.innerText = transl_lang_key + ': ' + lang_word_map[transl_lang_key];
                     translations.appendChild(word_translation_el);
                 }
