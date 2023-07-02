@@ -51,7 +51,9 @@
         </div>
     </div>
     <script src="greek.js"></script>
+    <script src="js-yaml.js"></script>
     <script>
+        var en_greek_ru = YAML.parse(greek_yaml);
         const container = document.getElementById("container")
         var know_count = 0;
         var dont_know_count = 0;
