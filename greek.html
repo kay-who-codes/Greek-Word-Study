@@ -56,19 +56,19 @@
     <script src="js-yaml.js"></script>
     <script>
         var en_greek_ru = YAML.parse(greek_yaml);
-        const container = document.getElementById("container")
+        const container = document.getElementById("container");
         var know_count = 0;
         var dont_know_count = 0;
 
         // add score line
-        const score_line = document.getElementById("score")
+        const score_line = document.getElementById("score");
 
         // add laguage switcher
-        const gr_radio = document.getElementById("gr_radio")
-        const ru_radio = document.getElementById("ru_radio")
+        const gr_radio = document.getElementById("gr_radio");
+        const ru_radio = document.getElementById("ru_radio");
         
         // add lines
-        const lines = document.getElementById("lines")
+        const lines = document.getElementById("lines");
 
         function update_score(){
             score_line.innerText = 'Wins: ' + know_count + ' | Loses: ' + dont_know_count;
@@ -82,9 +82,9 @@
         function try_to_show_next(){
             console.log(selected_language);
             if (selected_unit && selected_language){
-                let unit_obj = document.elements_iters[selected_unit]
-                let elements_iter = unit_obj.elements_iter
-                let element_was_added = unit_obj.element_was_added
+                let unit_obj = document.elements_iters[selected_unit];
+                let elements_iter = unit_obj.elements_iter;
+                let element_was_added = unit_obj.element_was_added;
                 if (element_was_added && element_is_solved){
                     unit_obj.element_was_added = elements_iter.next().value;
                 }
@@ -101,7 +101,7 @@
 
 
         // add unit padio buttons
-        units = document.getElementById('units')
+        units = document.getElementById('units');
         document.elements_iters = new Object();
         for (let unit_name in en_greek_ru){
             var unit = new Object();
@@ -154,13 +154,13 @@
                 const know_button = document.createElement("button");
                 know_button.setAttribute("type", "button");
                 know_button.setAttribute("class", "btn btn-success");
-                know_button.innerText = 'V'
+                know_button.innerText = 'Know';
                 buttons.appendChild(know_button);
 
                 const dont_know_button = document.createElement("button");
                 dont_know_button.setAttribute("type", "button");
                 dont_know_button.setAttribute("class", "btn btn-danger");
-                dont_know_button.innerText = 'X'
+                dont_know_button.innerText = 'Forgot';
                 buttons.appendChild(dont_know_button);
 
                 // add word
@@ -196,7 +196,7 @@
 
                 // add word
                 const random_id = Math.floor(Math.random() * lang_word_map_list.length);
-                let lang_word_map = lang_word_map_list[random_id]
+                let lang_word_map = lang_word_map_list[random_id];
                 
                 lang_word_map_list.splice(random_id, 1);
 
@@ -206,17 +206,17 @@
                 // add translations for other 
                 for (let transl_lang_key in lang_word_map){
                     const word_translation_el = document.createElement("div");
-                    word_translation_el.setAttribute('class', word_style + " text-bg-light")
+                    word_translation_el.setAttribute('class', word_style + " text-bg-light");
                     word_translation_el.innerText = transl_lang_key + ': ' + lang_word_map[transl_lang_key];
                     translations.appendChild(word_translation_el);
                 }
 
                 element_is_solved = false;
 
-                yield true
+                yield true;
             }
 
-            return false
+            return false;
         }
 
     </script>
