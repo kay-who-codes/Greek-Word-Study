@@ -74,8 +74,8 @@ a6:
     en: bicycle
     ru: велосипед
   - gr: μηχανάκι
-    en: мотоцикл
-    ru: motor bike
+    ru: мотоцикл
+    en: motor bike
   - gr: εισιτήριο
     en: ticket
     ru: билет
@@ -97,6 +97,15 @@ a6:
   - gr: παρά
     en: without
     ru: без
+  - gr: οκτώ παρά τέταρτο το βράδυ
+    en: 7:45 PM
+    ru: без 15ти 8 вечера
+  - gr: μια και μισή το μεσημέρι
+    en: 1:30 PM
+    ru: половина-второго дня
+  - gr: εφτά και δέκα το πρωί
+    en: 7:10 AM
+    ru: 7:10 утра
   - gr: περνώ/περνάω
     en: go through/pass
     ru: проходить
@@ -344,3 +353,128 @@ a7:
   - gr: ακόμα
     en: still
     ru: все еще
+  - gr: πόσον
+    en: how much
+    ru: сколько
+  - gr: πόσον καιρό είσαι εδώ;
+    en: how long are you here?
+    ru: как долго ты здесь?
+  - gr: τον Οκτώβριο κάνει ζέστη
+    en: October is hot
+    ru: октябрь жаркий
+  - gr: ακούω
+    en: hear
+    ru: слышать / слушать
+  - gr: βγαίνω έξω συχνά
+    en: I go out often
+    ru: я часто выхожу
+  
+a7_2:
+  - gr: θάλασσα
+    ru: море
+    en: sea
+  - gr: Ιανουάριος
+    en: January
+    ru: январь
+  - gr: Φεβρουάριος
+    en: February
+    ru: февраль
+  - gr: Μάρτιος
+    en: March
+    ru: март
+  - gr: Απρίλιος
+    en: April
+    ru: апрель
+  - gr: Μάιος
+    en: May
+    ru: Май
+  - gr: Ιούνιος
+    en: June
+    ru: июнь
+  - gr: Ιούλιος
+    en: July
+    ru: июль
+  - gr: Αύγουστος
+    en: August
+    ru: август
+  - gr: Σεπτέμβριος
+    en: September
+    ru: сентябрь
+  - gr: Οκτώβριος
+    en: October
+    ru: октябрь
+  - gr: Νοέμβριος
+    en: november
+    ru: ноябрь
+  - gr: Δεκέμβριος
+    en: December
+    ru: декабрь
+  - gr: ζεστη κρύο
+    en: hot cold
+    ru: горячая холодная
+  - gr: χειμώνας
+    en: winter
+    ru: зима
+  - gr: άνοιξη
+    en: spring
+    ru: весна
+  - gr: καλοκαίρι
+    en: summer
+    ru: лето
+  - gr: φθινόπωρο
+    en: autumn
+    ru: осень
+  - gr: τον χειμώνα κάνει κρύο
+    en: it is cold in winter
+    ru: зимой холодно
+  - gr: Σήμερα κάνει μείον δέκα βαθμούς Κελσίου
+    en: Today is -10 degree Celsius
+    ru: Сегодня -10 градусов Цельсия
+  - gr: πολύ κρύο
+    en: very cold
+    ru: очень холодно
+  - gr: Τι καιρό κάνει;
+    en: What's the weather like;
+    ru: Какая там погода;
+  - gr: Κάνει λίγο κρύο
+    en: It's a bit cold
+    ru: немного холодно
+  - gr: Κάνω μπάνιο στη θάλασσα
+    en: I am swimming in the sea
+    ru: я плаваю в море
+  - gr: Κάνω σκι
+    en: I am skiing
+    ru: я катаюсь на лыжах
+  - gr: πίνω κρύο νερό
+    en: I drink cold water
+    ru: я пью холодную воду
+  - gr: τρώω παγωτό
+    en: I am eating ice cream
+    ru: я ем мороженое
+  - gr: ανοίγω
+    en: open up
+    ru: я открываю
+  - gr: οπώρα
+    en: fruit
+    ru: фрукты
+  - gr: παγωτό
+    en: ice cream
+    ru: мороженое
+  - gr: σύννεφα
+    en: clouds
+    ru: облака
+  - gr: η βροχή
+    en: the rain
+    ru: дождь
+  - gr: χιόνι
+    en: snow
+    ru: снег
+  - gr: κάνει αέρας
+    en: it's windy
+    ru: Ветрено
+  - gr: καταιγίδα
+    en: thunderstorm
+    ru: гроза
+  - gr: ήλιος
+    en: sun
+    ru: солнце
