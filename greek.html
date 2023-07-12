@@ -7,6 +7,7 @@
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <title>Greek words</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="icon" type="image/png" href="ico.png">
 </head>
 
 <body>
@@ -80,7 +81,6 @@
         var element_was_added = true;
         var element_is_solved = true;
         function try_to_show_next(){
-            console.log(selected_language);
             if (selected_unit && selected_language){
                 let unit_obj = document.elements_iters[selected_unit];
                 let elements_iter = unit_obj.elements_iter;
@@ -134,7 +134,7 @@
         function* add_one_more_element(unit_name_){
             // Create element:
             let lang_word_map_list = en_greek_ru[unit_name_];
-            for (let i = lang_word_map_list.length; i > 0; i--){
+            while (lang_word_map_list.length > 0){
                 // add line
                 const line = document.createElement("div");
                 line.setAttribute('class', "p-1");
@@ -174,7 +174,16 @@
                 translations.setAttribute('class', "d-none");
                 line.appendChild(translations);
 
+                const random_id = Math.floor(Math.random() * lang_word_map_list.length);
+
+                know_button.word_index = random_id
+                know_button.selected_language = selected_language
+                know_button.lang_word_map_list = lang_word_map_list
                 know_button.onclick = function(){
+                    // remove word
+                    let lang_word_map = this.lang_word_map_list[this.word_index];
+                    this.lang_word_map_list.splice(random_id, 1);
+
                     know_count++;
                     element_is_solved = true;
                     update_score();
@@ -195,13 +204,8 @@
                 };
 
                 // add word
-                const random_id = Math.floor(Math.random() * lang_word_map_list.length);
                 let lang_word_map = lang_word_map_list[random_id];
-                
-                lang_word_map_list.splice(random_id, 1);
-
                 word_el.innerText = selected_language + ': ' + lang_word_map[selected_language];
-                delete lang_word_map[selected_language];
 
                 // add translations for other 
                 for (let transl_lang_key in lang_word_map){
